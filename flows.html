@@ -234,7 +234,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
       <div class="dg-key" aria-hidden="true">
         <span><i></i>Data path</span>
         <span><i class="dash"></i>Gated by Ruth's consent</span>
-        <span>Server side: stages 02 to 06</span>
+        <span>Stage 02 runs on the device first. Stages 05 and 06 run on our servers.</span>
       </div>
     </div>
 
@@ -292,6 +292,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
       <div class="panel card">
         <h3>The plan</h3>
         <p>Fine-tune a senior-tuned speech model with LoRA adapters on an open base model, starting from the proof of concept above.</p>
+        <p>Run that model on the phone, and later on the handheld, as the first stop for every request. It handles the frequent ones itself: labels, the TV, calls, reminders, check-ins. Only hard requests, like a dense letter or an open question, go to a cloud model. Requests that stay on the device cost close to nothing to serve, work without a connection and keep more of Ruth’s audio off our servers.</p>
         <p>Then extend the same method to how seniors phrase requests (“the thing on the TV went away”), to reading labels on pill bottles and mail, and to the scam pattern library.</p>
         <p class="moat">Public corpora contain little speech from older adults giving commands to a home device. Each Doodad user who opts in adds that kind of data, and a general-purpose model does not have it.</p>
       </div>
@@ -360,7 +361,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
 
   var NODES = [
     { id:1, title:"Ruth's Doodad",   lines:["Press-to-talk audio","Frame only on LOOK","Button events","Off until pressed"] },
-    { id:2, title:"Understanding",  lines:["Speech recognition","tuned to older voices","Vision, label reading","Intent"] },
+    { id:2, title:"Understanding",  lines:["Senior-tuned model","on device first","Cloud model only","for hard requests"] },
     { id:3, title:"Safety checks",  lines:["Scam patterns","Health guardrail","Labels, never doses","911 path"] },
     { id:4, title:"Answer or act",  lines:["Spoken answer","IR command","Call","Alert"] },
     { id:5, title:"Event record",   lines:["One per moment","Media: 30 days (plan)","Deleted on request"] },
@@ -374,35 +375,35 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
     { id:"scam", label:"Scam letter", time:"8:41 AM", mode:"LOOK", color:"--sos", always:true,
       s:[
         "LOOK pressed. One camera frame of a letter. Ruth asks: “Is this real?”",
-        "Reads the letter: pay $1,200 in gift cards by 5 PM today or lose your benefits. Intent: check a document.",
+        "Reads the letter: pay $1,200 in gift cards by 5 PM today or lose your benefits. Intent: check a document. A dense letter goes to the cloud model.",
         "Scam pattern match: gift-card payment plus a deadline plus a benefits threat. Category: scam warning.",
         "Doodad says: “This looks like a scam. Please don't pay it or call that number. I'm letting Sarah and Mike know.”"
       ],
-      rec:[["moment","m_0841"],["time","08:41"],["trigger","LOOK"],["intent","check_document"],["safety","scam_pattern: gift_card, deadline"],["category","scam_warning"],["action","spoken_warning, family_alert"],["media","frame_01.jpg, 30-day retention"]],
+      rec:[["moment","m_0841"],["time","08:41"],["trigger","LOOK"],["intent","check_document"],["model","cloud (escalated)"],["safety","scam_pattern: gift_card, deadline"],["category","scam_warning"],["action","spoken_warning, family_alert"],["media","frame_01.jpg, 30-day retention"]],
       fam:"Scam warning: Mom asked about a letter demanding $1,200 in gift cards by 5 PM. Doodad told her it is a scam and not to pay.",
       mike:"Mike receives the same scam warning at the same time.",
       log:"access_log: sarah viewed m_0841 at 08:42 · mike viewed m_0841 at 08:50" },
     { id:"pill", label:"Pill bottle", time:"9:05 AM", mode:"LOOK", color:"--look", always:false,
       s:[
-        "LOOK pressed. One camera frame of a pill bottle. Ruth asks: “Is this my morning one?”",
-        "Reads the label: Lisinopril 10 mg, take one tablet daily. Intent: medication check.",
+        "LOOK pressed. One camera frame of a pill bottle. Ruth asks: “Is this the one I take with breakfast?”",
+        "Reads the label: Lisinopril 10 mg, take one tablet daily. Intent: medication check. Handled by the on-device model.",
         "Health guardrail: Doodad reads the label and gives no dosing advice. Matches the 9:00 AM Lisinopril reminder Sarah set.",
         "Doodad says: “This is Lisinopril, 10 milligrams. The label says one tablet daily. It's the one Sarah set for 9 o'clock.”"
       ],
-      rec:[["moment","m_0905"],["time","09:05"],["trigger","LOOK"],["intent","medication_check"],["label","Lisinopril 10 mg, 1 tablet daily"],["guardrail","label_only"],["reminder","rem_0900 matched"],["category","routine"],["media","frame_01.jpg, 30-day retention"]],
+      rec:[["moment","m_0905"],["time","09:05"],["trigger","LOOK"],["intent","medication_check"],["model","on_device"],["label","Lisinopril 10 mg, 1 tablet daily"],["guardrail","label_only"],["reminder","rem_0900 matched"],["category","routine"],["media","frame_01.jpg, 30-day retention"]],
       lv:{ "private":"Mom used Doodad at 9:05 AM.",
            "summary":"Mom checked her 9:00 medication with Doodad. Care tab: 9:00 Lisinopril checked off.",
-           "detailed":"Mom asked “Is this my morning one?” Doodad read the label: Lisinopril 10 mg, one tablet daily. It matches the 9:00 reminder. Care tab: checked off. Photo attached." },
+           "detailed":"Mom asked “Is this the one I take with breakfast?” Doodad read the label: Lisinopril 10 mg, one tablet daily. It matches the 9:00 reminder. Care tab: checked off. Photo attached." },
       mike:"Mike's app shows the same view at Ruth's level.",
       log:"access_log: sarah viewed m_0905 at 09:20" },
     { id:"tv", label:"TV fix", time:"2:31 PM", mode:"LOOK", color:"--look", always:false, partner:true,
       s:[
         "LOOK pressed. One camera frame of the TV. Ruth says: “The thing on the TV went away.”",
-        "Vision: TV is on HDMI 2 with a no-signal screen. Intent: get the TV picture back.",
+        "Vision: TV is on HDMI 2 with a no-signal screen. Intent: get the TV picture back. Handled on device.",
         "No safety flags.",
         "IR command INPUT → Cable. Doodad says: “Your TV was on the wrong input. I switched it back to cable.”"
       ],
-      rec:[["moment","m_1431"],["time","14:31"],["trigger","LOOK"],["intent","tv_help"],["observed","hdmi_2, no_signal"],["action","ir: INPUT → Cable"],["result","resolved"],["category","routine"],["pattern","tv_help: 4 in 7 days"]],
+      rec:[["moment","m_1431"],["time","14:31"],["trigger","LOOK"],["intent","tv_help"],["model","on_device"],["observed","hdmi_2, no_signal"],["action","ir: INPUT → Cable"],["result","resolved"],["category","routine"],["pattern","tv_help: 4 in 7 days"]],
       lv:{ "private":"Mom used Doodad at 2:31 PM.",
            "summary":"Doodad helped Mom with the TV.",
            "detailed":"Mom said “The thing on the TV went away.” The TV was on HDMI 2 with no signal. Doodad switched the input to Cable. Photo attached." },
@@ -411,11 +412,11 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
     { id:"call", label:"Call Mike", time:"4:12 PM", mode:"TALK", color:"--talk", always:false,
       s:[
         "TALK pressed. Ruth says: “Call Mike.”",
-        "Intent: place a call. Contact: Mike, son.",
+        "Intent: place a call. Contact: Mike, son. Handled on device.",
         "No safety flags.",
         "Doodad calls Mike on its own cellular line, with Wi-Fi calling as fallback. The call lasts 14 minutes."
       ],
-      rec:[["moment","m_1612"],["time","16:12"],["trigger","TALK"],["intent","call"],["contact","mike"],["line","cellular"],["duration","14m 02s"],["content","not_recorded"],["category","routine"]],
+      rec:[["moment","m_1612"],["time","16:12"],["trigger","TALK"],["intent","call"],["model","on_device"],["contact","mike"],["line","cellular"],["duration","14m 02s"],["content","not_recorded"],["category","routine"]],
       lv:{ "private":"Mom used Doodad at 4:12 PM.",
            "summary":"Mom called Mike. 14 min.",
            "detailed":"Mom called Mike at 4:12 PM. 14 min. Doodad does not record call audio." },
@@ -423,19 +424,19 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
       log:"access_log: sarah viewed m_1612 at 18:00" },
     { id:"checkin", label:"Check-in", time:"6:03 PM", mode:"TALK", color:"--talk", always:true,
       s:[
-        "Sarah sends a check-in request from her app. Doodad asks aloud: “Sarah is checking in. Want to send her a note?” Ruth presses TALK: “Tell her I had a good day and the TV is working.”",
-        "Transcribes the reply. Intent: answer a check-in.",
+        "Sarah sends a check-in request from her app. Doodad asks aloud: “Sarah is checking in. Want to send her a note?” Ruth presses TALK: “Tell her I had lunch with Dot and I’m watching my program. I’m good.”",
+        "Transcribes the reply on device. Intent: answer a check-in.",
         "No safety flags. Ruth chose to answer. She can also say no or let it pass.",
         "Doodad says: “Sent to Sarah.”"
       ],
-      rec:[["moment","m_1803"],["time","18:03"],["trigger","checkin_request (from: sarah)"],["response","answered"],["reply","“I had a good day and the TV is working.”"],["category","checkin_reply"]],
-      fam:"Mom replied: “I had a good day and the TV is working.”",
+      rec:[["moment","m_1803"],["time","18:03"],["trigger","checkin_request (from: sarah)"],["response","answered"],["reply","“I had lunch with Dot and I’m watching my program. I’m good.”"],["category","checkin_reply"]],
+      fam:"Mom replied: “I had lunch with Dot and I’m watching my program. I’m good.”",
       mike:"The reply goes to Sarah, who asked.",
       log:"access_log: sarah viewed m_1803 at 18:04" },
     { id:"sos", label:"SOS", time:"7:45 PM", mode:"SOS", color:"--sos", always:true,
       s:[
         "Ruth holds the recessed SOS button. Doodad counts down aloud so she can cancel.",
-        "Listens after the countdown. Ruth says: “No, don't call 911. Get Sarah.”",
+        "Listens after the countdown, on device so it works without a connection. Ruth says: “No, don't call 911. Get Sarah.”",
         "911 path: Doodad asks “Do you want me to call 911?” Ruth declines. Doodad calls 911 only when Ruth asks.",
         "Alert to all family. Sarah claims it, and Doodad connects Ruth and Sarah by phone in 18 seconds."
       ],

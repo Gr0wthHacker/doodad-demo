@@ -373,7 +373,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--display);letter-spacing:-.015em;text-wrap
         <div class="biz-grid">
           <section><span class="k">Who pays</span><h3>Sarah, the adult child</h3><p>$49 a month, cancel any time, 30-day returns. Ruth uses it. Sarah buys it, sets it up and gets the peace of mind.</p></section>
           <section><span class="k">How it earns</span><ol><li><b>Subscription.</b> Every moment in this day.</li><li><b>Partner offers to family.</b> Disclosed, never pitched to Ruth (2:31 PM).</li><li><b>Plans and care organizations.</b> Medicare Advantage and aging-in-place programs paying per member (planned).</li></ol></section>
-          <section><span class="k">What compounds</span><h3>Data and trust incumbents lack</h3><p>Opt-in speech and requests from people 65+, the group general models serve worst. A consent model Ruth accepts, so she keeps using it.</p></section>
+          <section><span class="k">What compounds</span><h3>Our own senior-tuned model</h3><p>Opt-in speech and requests from people 65+ train a small model that runs on the device and handles the common requests. Only hard ones go to a costly cloud model. Each user makes it cheaper and better for the next.</p></section>
           <section><span class="k">How it ships</span><h3>App first, then the handheld</h3><p>Now: look and talk on Ruth's own phone, with family sync. Next: the handheld, on the same pipeline and family app.</p></section>
         </div>
         <div class="stat"><b>$7.7B</b><span>lost to fraud by Americans 60 and older in 2025, up about 60% in a year (FBI Internet Crime Complaint Center).</span></div>
@@ -390,7 +390,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--display);letter-spacing:-.015em;text-wrap
           </tbody>
         </table></div>
         <div class="biz-grid">
-          <section><span class="k">Where the cost goes</span><p>Spoken answers are most of the AI cost. Simple jobs like a TV input change or a reminder run on cheap paths with no long reply. Cell service and support are the other large lines.</p></section>
+          <section><span class="k">Where the cost goes</span><p>Cloud AI is the line that grows with use. The raise funds a senior-tuned model that runs on the phone, then the handheld, and answers the frequent requests (labels, the TV, calls, reminders, check-ins) itself. Only hard requests, like a dense letter or an open question, go to a cloud model. That routing is not in these numbers; it is upside on top of them.</p></section>
           <section><span class="k">How to read this</span><p>From our September 2026 planning model for the handheld, recomputed at $49, using 2027 model prices. The app has no hardware or cell cost. The handheld's parts run about $76 at 10,000 units. The pilot logs every request by type so the model is rebuilt on real usage.</p></section>
         </div>
       </div>
@@ -2120,7 +2120,7 @@ const CH=[
     setPipe('hear','“Is this real?”');
     await c.all([showProp('letter'),poseTo(POSE.aim,1700),flyTo(VIEW.aim,1700)]);
     await fx(true); c.chk();
-    setPipe('see','Letter: $1,200, gift cards, 5 PM deadline');
+    setPipe('see','Letter: $1,200, gift cards, 5 PM deadline. Dense document, sent to the cloud model');
     await c.say('doodad','Let me read it…');
     await c.wait(700);
     setPipe('check','Gift-card payment + urgency = known scam pattern',true);
@@ -2142,7 +2142,7 @@ const CH=[
     setPipe('hear','“Is this the one I take with breakfast?”');
     await c.all([showProp('bottle'),poseTo(POSE.aim,1600),flyTo({p:V(70,200,230),t:V(0,40,-140)},1600)]);
     await fx(true); c.chk();
-    setPipe('see','Label: Lisinopril 10 mg, once daily in the morning');
+    setPipe('see','Label: Lisinopril 10 mg, once daily in the morning. Handled by the on-device model');
     await c.wait(600);
     setPipe('check','Matches Sarah’s 9:00 AM reminder. Reads label only, no dosing advice.');
     setPipe('act','Reads the label aloud, confirms the match');
@@ -2161,7 +2161,7 @@ const CH=[
     await c.say('ruth','The TV just says no signal. Can you fix it?');
     setPipe('hear','“Can you fix it?”');
     await c.all([poseTo(POSE.tv,1400),flyTo(VIEW.tv,1400)]);
-    setPipe('see','TV on HDMI 2, no signal. Cable box is on HDMI 1 / Cable.');
+    setPipe('see','TV on HDMI 2, no signal. Known screen, handled on device');
     await c.say('doodad','Your TV is on the wrong input. I’ll switch it back to cable. Keep me pointed at the TV.');
     setPipe('check','Known TV model. Input change is safe to do.');
     setPipe('act','Sends IR: INPUT → Cable');
@@ -2177,7 +2177,7 @@ const CH=[
     await c.all([poseTo(POSE.rest,1100),flyTo(VIEW.front,1200)]);
     press('talk');
     await c.say('ruth','Call Mike.');
-    setPipe('hear','“Call Mike.”'); setPipe('check','Mike is in Ruth’s circle'); setPipe('act','Places the call on Doodad’s own line');
+    setPipe('hear','“Call Mike.”'); setPipe('check','Mike is in Ruth’s circle. Handled on device'); setPipe('act','Places the call on Doodad’s own line');
     S.talk=true;
     await c.say('doodad','Calling Mike now.');
     await c.wait(1600);
