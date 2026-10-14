@@ -71,7 +71,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--display);letter-spacing:-.015em;text-wrap
 .paused-badge{position:absolute;left:50%;top:20px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:var(--ink);color:var(--bg)}
 .pause{border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:var(--panel);font-weight:600;font-size:13.5px;white-space:nowrap}
 .pause[aria-pressed="true"]{background:var(--look);border-color:var(--look);color:#1a1205}
-.biz{position:absolute;left:22px;right:22px;top:22px;max-height:calc(100% - 80px);max-width:760px;overflow-y:auto;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:0 20px 50px rgb(0 0 0 / .16);display:grid;gap:16px;align-content:start}
+.biz{position:absolute;left:22px;right:22px;top:22px;max-height:calc(100% - 80px);max-width:700px;overflow-y:auto;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:0 20px 50px rgb(0 0 0 / .16);display:grid;gap:16px;align-content:start}
 .biz-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .biz section{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:6px;align-content:start;background:var(--panel)}
 .biz .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -82,6 +82,22 @@ h1,h2,h3,h4{margin:0;font-family:var(--display);letter-spacing:-.015em;text-wrap
 .biz .stat{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;padding:12px 16px;border-radius:14px;background:var(--soft)}
 .biz .stat b{font-size:28px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .biz .stat span{font-size:13.5px;color:var(--muted);max-width:52ch}
+.biz-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.biz-h .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.biz-h h2{font-size:clamp(22px,2.3vw,30px);font-weight:700;margin-top:4px}
+.btabs{display:flex;gap:3px;background:var(--soft);padding:3px;border-radius:999px;flex-wrap:wrap}
+.btabs button{border:0;background:none;border-radius:999px;padding:7px 12px;font-weight:600;font-size:13px;color:var(--muted);white-space:nowrap}
+.btabs button[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .1)}
+.bp{display:grid;gap:12px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.tbl table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.tbl td{color:var(--muted)}
+.tbl td:first-child{color:var(--ink);font-weight:600}
+.tbl td:not(:first-child){font-variant-numeric:tabular-nums}
+.tbl tr.hl td{background:var(--soft);color:var(--ink);font-weight:700}
 .biz .acts{display:flex;gap:8px;flex-wrap:wrap}
 .biz .acts a,.biz .acts button{font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);text-decoration:none}
 .biz .acts .pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -344,14 +360,60 @@ h1,h2,h3,h4{margin:0;font-family:var(--display);letter-spacing:-.015em;text-wrap
     <div class="hint">Drag to rotate · ← → chapters · Space to pause</div>
     <div class="paused-badge" id="pausedBadge" hidden>Paused · Space to resume</div>
     <div class="biz" id="biz" hidden>
-      <div><div class="k" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">After the day</div><h2 style="font-size:clamp(24px,2.4vw,32px);font-weight:700;margin-top:4px">The business in this day</h2></div>
-      <div class="biz-grid">
-        <section><span class="k">Who pays</span><h3>Sarah, the adult child</h3><p>$49 a month, cancel any time, 30-day returns. Ruth uses it; Sarah buys it, sets it up and gets the peace of mind.</p></section>
-        <section><span class="k">How it earns</span><ol><li><b>Subscription.</b> Every moment in this day.</li><li><b>Partner offers to family.</b> Disclosed, never pitched to Ruth (2:31 PM).</li><li><b>Plans and care organizations.</b> Medicare Advantage and aging-in-place programs paying per member (planned).</li></ol></section>
-        <section><span class="k">What compounds</span><h3>Data and trust incumbents lack</h3><p>Opt-in speech and requests from people 65+, the group general models serve worst. A consent model Ruth accepts, so she keeps using it.</p></section>
-        <section><span class="k">How it ships</span><h3>App first, then the handheld</h3><p>Now: look and talk on Ruth's own phone, with family sync. Next: the handheld, on the same pipeline and family app.</p></section>
+      <div class="biz-h">
+        <div><div class="k">After the day</div><h2>The business in this day</h2></div>
+        <div class="btabs" role="tablist" aria-label="Business details">
+          <button type="button" role="tab" data-bt="model" aria-selected="true">Model</button>
+          <button type="button" role="tab" data-bt="econ" aria-selected="false">Unit economics</button>
+          <button type="button" role="tab" data-bt="comp" aria-selected="false">Competition</button>
+          <button type="button" role="tab" data-bt="gtm" aria-selected="false">Go to market</button>
+        </div>
       </div>
-      <div class="stat"><b>$7.7B</b><span>lost to fraud by Americans 60 and older in 2025, up about 60% in a year (FBI Internet Crime Complaint Center).</span></div>
+      <div class="bp" data-bp="model">
+        <div class="biz-grid">
+          <section><span class="k">Who pays</span><h3>Sarah, the adult child</h3><p>$49 a month, cancel any time, 30-day returns. Ruth uses it. Sarah buys it, sets it up and gets the peace of mind.</p></section>
+          <section><span class="k">How it earns</span><ol><li><b>Subscription.</b> Every moment in this day.</li><li><b>Partner offers to family.</b> Disclosed, never pitched to Ruth (2:31 PM).</li><li><b>Plans and care organizations.</b> Medicare Advantage and aging-in-place programs paying per member (planned).</li></ol></section>
+          <section><span class="k">What compounds</span><h3>Data and trust incumbents lack</h3><p>Opt-in speech and requests from people 65+, the group general models serve worst. A consent model Ruth accepts, so she keeps using it.</p></section>
+          <section><span class="k">How it ships</span><h3>App first, then the handheld</h3><p>Now: look and talk on Ruth's own phone, with family sync. Next: the handheld, on the same pipeline and family app.</p></section>
+        </div>
+        <div class="stat"><b>$7.7B</b><span>lost to fraud by Americans 60 and older in 2025, up about 60% in a year (FBI Internet Crime Complaint Center).</span></div>
+      </div>
+      <div class="bp" data-bp="econ" hidden>
+        <div class="tbl"><table>
+          <thead><tr><th></th><th>At launch</th><th>At scale</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>$49/mo</td><td>$49/mo</td></tr>
+            <tr><td>Cost to serve, typical user (30 requests a day)</td><td>$18.01</td><td>$11.38</td></tr>
+            <tr class="hl"><td>Gross margin, typical user</td><td>63%</td><td>77%</td></tr>
+            <tr><td>Gross margin, heavy user (50 requests a day)</td><td>59%</td><td>75%</td></tr>
+            <tr><td>Payback at $250 to acquire a family</td><td>8 months</td><td>7 months</td></tr>
+          </tbody>
+        </table></div>
+        <div class="biz-grid">
+          <section><span class="k">Where the cost goes</span><p>Spoken answers are most of the AI cost. Simple jobs like a TV input change or a reminder run on cheap paths with no long reply. Cell service and support are the other large lines.</p></section>
+          <section><span class="k">How to read this</span><p>From our September 2026 planning model for the handheld, recomputed at $49, using 2027 model prices. The app has no hardware or cell cost. The handheld's parts run about $76 at 10,000 units. The pilot logs every request by type so the model is rebuilt on real usage.</p></section>
+        </div>
+      </div>
+      <div class="bp" data-bp="comp" hidden>
+        <div class="tbl"><table>
+          <thead><tr><th>Category</th><th>Examples</th><th>What it leaves out</th></tr></thead>
+          <tbody>
+            <tr><td>Medical alert</td><td>Lively, Medical Guardian</td><td>Only for emergencies, so it sits in a drawer. Doodad covers SOS inside a habit Ruth uses every day.</td></tr>
+            <tr><td>Senior tablets</td><td>GrandPad</td><td>A screen and apps to learn. Doodad is point and ask.</td></tr>
+            <tr><td>Companion robots</td><td>ElliQ</td><td>Stays on a table and talks. It can't read the mail in Ruth's hand or fix the TV across the room.</td></tr>
+            <tr><td>Smart speakers</td><td>Alexa, Google</td><td>No vision, not tuned for older voices, and no family sharing Ruth controls.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="stat"><b style="font-size:20px">Our edge</b><span>The only product built around both buyers: Ruth's consent and Sarah's peace of mind, with speech tuned on older adults.</span></div>
+      </div>
+      <div class="bp" data-bp="gtm" hidden>
+        <div class="biz-grid">
+          <section><span class="k">Channels, in order</span><ol><li><b>Adult children directly.</b> The scam-alert moment is the ad.</li><li><b>Credit unions and community banks.</b> Offered to members as fraud protection.</li><li><b>Medicare Advantage and aging-in-place programs.</b> Supplemental benefit, paid per member (planned).</li></ol></section>
+          <section><span class="k">Proof so far</span><p>Our first speech test: base Whisper missed 30.2% of words from senior speakers against 20.7% for younger speakers (preliminary run on the CORAAL corpus). The app build covers look, talk and family sync.</p></section>
+          <section><span class="k">What the pilot measures</span><ol><li>Looks per senior per day</li><li>Scams caught and confirmed by family</li><li>Family members active each week</li><li>30-day retention</li></ol></section>
+          <section><span class="k">Why now</span><p>Vision models can read a letter or a pill label for cents per answer, and fraud against older adults keeps climbing. Families need help and no product serves both Ruth and Sarah.</p></section>
+        </div>
+      </div>
       <div class="acts"><a class="pri" href="flows.html">See the data flows →</a><a href="flows.html#training">Senior speech data</a><button type="button" id="bizReplay">Replay the day</button></div>
     </div>
   </section>
@@ -1606,6 +1668,36 @@ const glowRing=new THREE.Mesh(new THREE.TorusGeometry(41.5,.9,10,80),glowMat); g
 const dockLight=new THREE.PointLight(0xffb469,0,260,2); dockLight.position.set(0,30,30); dock.add(dockLight);
 dock.visible=false; dock.scale.setScalar(.001);
 
+/* Phone app (MVP): Simple Mode on Ruth's own phone */
+const phoneG=new THREE.Group(); root.add(phoneG); phoneG.visible=false;
+mesh(slab(74,152,12,12,8.5,2.5),new THREE.MeshPhysicalMaterial({color:C('#1C1E21'),roughness:.3,clearcoat:.8,metalness:.3}),phoneG);
+function rrect(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.lineTo(X+W-r,Y);x.quadraticCurveTo(X+W,Y,X+W,Y+r);x.lineTo(X+W,Y+H-r);x.quadraticCurveTo(X+W,Y+H,X+W-r,Y+H);x.lineTo(X+r,Y+H);x.quadraticCurveTo(X,Y+H,X,Y+H-r);x.lineTo(X,Y+r);x.quadraticCurveTo(X,Y,X+r,Y);x.closePath();}
+const phoneTex=tex(600,1236,(x,w,h)=>{
+  x.fillStyle='#F6F4EE';x.fillRect(0,0,w,h);
+  x.fillStyle='#16191D';rrect(x,215,26,170,44,22);x.fill();
+  x.font='700 30px "Hanken Grotesk",Arial,sans-serif';x.fillText('9:41',52,60);
+  x.font='800 64px "Hanken Grotesk",Arial,sans-serif';if('letterSpacing' in x)x.letterSpacing='-2px';x.fillText('Doodad',52,170);if('letterSpacing' in x)x.letterSpacing='0px';
+  x.fillStyle='#5C636C';x.font='500 32px "Hanken Grotesk",Arial,sans-serif';x.fillText('Good morning, Ruth',52,218);
+  const card=(Y,fill,word,sub,icon)=>{x.fillStyle=fill;rrect(x,40,Y,520,330,48);x.fill();
+    x.strokeStyle='#fff';x.fillStyle='#fff';x.lineWidth=12;x.lineCap='round';x.lineJoin='round';const cx=300,cy=Y+110;
+    if(icon==='eye'){x.beginPath();x.moveTo(cx-62,cy);x.quadraticCurveTo(cx,cy-60,cx+62,cy);x.quadraticCurveTo(cx,cy+60,cx-62,cy);x.stroke();x.beginPath();x.arc(cx,cy,18,0,Math.PI*2);x.fill();}
+    else{x.beginPath();x.moveTo(cx-15,cy-38);x.lineTo(cx-15,cy);x.arc(cx,cy,15,Math.PI,0,true);x.lineTo(cx+15,cy-38);x.arc(cx,cy-38,15,0,Math.PI,true);x.fill();x.beginPath();x.arc(cx,cy-2,34,.15*Math.PI,.85*Math.PI);x.stroke();x.beginPath();x.moveTo(cx,cy+32);x.lineTo(cx,cy+50);x.stroke();}
+    x.textAlign='center';x.font='800 84px "Hanken Grotesk",Arial,sans-serif';x.fillText(word,cx,Y+250);x.font='500 30px "Hanken Grotesk",Arial,sans-serif';x.globalAlpha=.9;x.fillText(sub,cx,Y+298);x.globalAlpha=1;x.textAlign='left';};
+  card(262,'#D98C1F','LOOK','Point your phone at anything','eye');
+  card(622,'#2F5F9E','TALK','Ask a question or call family','mic');
+  x.fillStyle='#C23B2C';rrect(x,170,990,260,96,48);x.fill();
+  x.fillStyle='#fff';x.textAlign='center';x.font='800 44px "Hanken Grotesk",Arial,sans-serif';x.fillText('SOS',300,1054);
+  x.fillStyle='#5C636C';x.font='500 28px "Hanken Grotesk",Arial,sans-serif';x.fillText('Sarah sees a summary',300,1170);x.textAlign='left';
+});
+const phoneScreen=new THREE.Mesh(new THREE.PlaneGeometry(68,140),new THREE.MeshBasicMaterial({map:phoneTex,toneMapped:false}));
+phoneScreen.position.z=4.3; phoneG.add(phoneScreen);
+async function swapToPhone(on){
+  const a=on?dev:phoneG, b=on?phoneG:dev;
+  b.visible=true; b.scale.setScalar(.001);
+  await tween(420,k=>a.scale.setScalar(Math.max(.001,1-ease(k))),'swapA'); a.visible=false; a.scale.setScalar(1);
+  await tween(520,k=>b.scale.setScalar(Math.max(.001,ease(k))),'swapB');
+}
+
 /* Props: scam letter, pill bottle, TV */
 const letterCanvas=canv(850,1100,(x,w,h)=>{
   x.fillStyle='#FBFAF6';x.fillRect(0,0,w,h);
@@ -1753,6 +1845,8 @@ function resetWorld(){
   $('tExplode').setAttribute('aria-pressed',false);
   if(docked){docked=false;cord.visible=true;dock.visible=false;dock.scale.setScalar(.001);glowMat.opacity=0;dockLight.intensity=0;}
   controls.autoRotate=false; $('tSpin').setAttribute('aria-pressed',false);
+  phoneG.visible=false; phoneG.scale.setScalar(1); phoneG.position.set(0,0,0); phoneG.rotation.set(0,0,0);
+  dev.visible=true; dev.scale.setScalar(1); dev.position.x=0; dev.rotation.set(0,0,0);
 }
 
 /* =========================================================
@@ -2013,6 +2107,11 @@ const CH=[
     await c.say('note','Inside: camera and work light, an IR blaster for the TV, microphones tuned for older voices, a loud speaker and a battery that lasts days.');
     await c.wait(1600);
     await c.all([setExplode(false),flyTo(VIEW.hero,1100)]);
+    await c.say('note','Ruth doesn’t need the handheld to start. Doodad ships first as an app on her own phone: the same LOOK and TALK, the same family app for Sarah.');
+    await c.all([swapToPhone(true),flyTo({p:V(90,120,330),t:V(0,96,0)},1200)]);
+    await c.wait(3200);
+    await c.say('note','The handheld follows for seniors who never took to a smartphone. Same pipeline, same family app, same subscription.');
+    await c.all([swapToPhone(false),flyTo(VIEW.hero,1200)]);
   }},
  {time:'8:41 AM',title:'The mail',nav:'Scam letter',sub:'A “final notice” arrives demanding gift cards. Ruth points Doodad at it before she calls anyone.',
   async run(c){
@@ -2149,14 +2248,16 @@ const CH=[
   }},
  {time:'After the day',title:'The business in this day',nav:'The business',sub:'Who pays, how it earns, and what gets harder to copy every day Ruth uses it.',
   async run(c){
-    await setDock(true); c.chk();
+    setBizTab('model');
     $('biz').hidden=false; document.querySelector('.chcard').hidden=true; $('pipe').hidden=true;
-    flyTo({p:V(-140,175,540),t:V(-140,70,0)},1400);
-    await c.wait(8000);
+    phoneG.visible=true; phoneG.position.set(50,0,-6); phoneG.rotation.y=-.22; dev.position.x=-40; dev.rotation.y=.18;
+    await c.all([poseTo(POSE.rest,900),flyTo({p:V(-195,165,900),t:V(-195,95,0)},1400)]);
+    if(autoplay){ for(const t of ['econ','comp','gtm']){ await c.wait(7000); setBizTab(t); } await c.wait(7000); }
+    else await c.wait(2000);
   }}
 ];
 const WHY=[
- 'One device replaces the phone, the remote and the alert pendant. It ships first as an app on Ruth’s own phone.',
+ 'It starts as an app on the phone Ruth already has. The handheld then replaces the remote, the magnifier and the alert pendant.',
  'Americans 60+ reported $7.7B in fraud losses to the FBI in 2025, up about 60% in a year.',
  'Sarah sets the schedule; Doodad reads labels against it and never advises on doses.',
  'Every fix is a call Sarah doesn’t take. Repeat patterns become family-side offers, the partner revenue line.',
@@ -2204,6 +2305,8 @@ function setAuto(on){ autoplay=on; const p=$('play'); p.setAttribute('aria-press
   p.querySelector('span').textContent=on?'Playing… stop':'Play the day';
   p.querySelector('svg').innerHTML=on?'<rect x="3.5" y="3" width="3.2" height="10" rx="1"/><rect x="9.3" y="3" width="3.2" height="10" rx="1"/>':'<path d="M4 2.5v11l9-5.5z"/>'; }
 $('pause').onclick=()=>setPaused(!paused);
+function setBizTab(t){ document.querySelectorAll('[data-bt]').forEach(b=>b.setAttribute('aria-selected',b.dataset.bt===t)); document.querySelectorAll('[data-bp]').forEach(p=>p.hidden=p.dataset.bp!==t); $('biz').scrollTop=0; }
+document.querySelectorAll('[data-bt]').forEach(b=>b.onclick=()=>setBizTab(b.dataset.bt));
 $('bizReplay').onclick=()=>{ setAuto(false); goChapter(0); };
 $('play').onclick=()=>{ if(autoplay){ setAuto(false); return; } setAuto(true); goChapter(chapterIdx===CH.length-1||chapterIdx===0?0:chapterIdx); };
 document.addEventListener('keydown',e=>{
