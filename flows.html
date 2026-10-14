@@ -234,7 +234,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
       <div class="dg-key" aria-hidden="true">
         <span><i></i>Data path</span>
         <span><i class="dash"></i>Gated by Ruth's consent</span>
-        <span>Stage 02 runs on the device first. Stages 05 and 06 run on our servers.</span>
+        <span>Stage 02: commands on the device, most requests on our own models, hard ones on a frontier model. Stages 05 and 06 run on our servers.</span>
       </div>
     </div>
 
@@ -292,7 +292,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
       <div class="panel card">
         <h3>The plan</h3>
         <p>Fine-tune a senior-tuned speech model with LoRA adapters on an open base model, starting from the proof of concept above.</p>
-        <p>Run that model on the phone, and later on the handheld, as the first stop for every request. It handles the frequent ones itself: labels, the TV, calls, reminders, check-ins. Only hard requests, like a dense letter or an open question, go to a cloud model. Requests that stay on the device cost close to nothing to serve, work without a connection and keep more of Ruth’s audio off our servers.</p>
+        <p>Serve it as three tiers. Simple commands (calls, the TV remote, reminders, yes or no) run on the device and work offline. Our own senior-tuned models, running in our cloud, handle most other requests: speech, labels, mail. Only hard or high-stakes requests, like a suspected scam the model is unsure of, go to a frontier model. Each request our models keep costs a fraction of a frontier call, and we are not exposed to API price changes.</p>
         <p>Then extend the same method to how seniors phrase requests (“the thing on the TV went away”), to reading labels on pill bottles and mail, and to the scam pattern library.</p>
         <p class="moat">Public corpora contain little speech from older adults giving commands to a home device. Each Doodad user who opts in adds that kind of data, and a general-purpose model does not have it.</p>
       </div>
@@ -361,7 +361,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
 
   var NODES = [
     { id:1, title:"Ruth's Doodad",   lines:["Press-to-talk audio","Frame only on LOOK","Button events","Off until pressed"] },
-    { id:2, title:"Understanding",  lines:["Senior-tuned model","on device first","Cloud model only","for hard requests"] },
+    { id:2, title:"Understanding",  lines:["Commands on device","Our models next","Frontier only for","hard, high-stakes"] },
     { id:3, title:"Safety checks",  lines:["Scam patterns","Health guardrail","Labels, never doses","911 path"] },
     { id:4, title:"Answer or act",  lines:["Spoken answer","IR command","Call","Alert"] },
     { id:5, title:"Event record",   lines:["One per moment","Media: 30 days (plan)","Deleted on request"] },
@@ -375,22 +375,22 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
     { id:"scam", label:"Scam letter", time:"8:41 AM", mode:"LOOK", color:"--sos", always:true,
       s:[
         "LOOK pressed. One camera frame of a letter. Ruth asks: “Is this real?”",
-        "Reads the letter: pay $1,200 in gift cards by 5 PM today or lose your benefits. Intent: check a document. A dense letter goes to the cloud model.",
+        "Reads the letter: pay $1,200 in gift cards by 5 PM today or lose your benefits. Intent: check a document. A dense, high-stakes letter escalates to a frontier model.",
         "Scam pattern match: gift-card payment plus a deadline plus a benefits threat. Category: scam warning.",
         "Doodad says: “This looks like a scam. Please don't pay it or call that number. I'm letting Sarah and Mike know.”"
       ],
-      rec:[["moment","m_0841"],["time","08:41"],["trigger","LOOK"],["intent","check_document"],["model","cloud (escalated)"],["safety","scam_pattern: gift_card, deadline"],["category","scam_warning"],["action","spoken_warning, family_alert"],["media","frame_01.jpg, 30-day retention"]],
+      rec:[["moment","m_0841"],["time","08:41"],["trigger","LOOK"],["intent","check_document"],["model","frontier (escalated)"],["safety","scam_pattern: gift_card, deadline"],["category","scam_warning"],["action","spoken_warning, family_alert"],["media","frame_01.jpg, 30-day retention"]],
       fam:"Scam warning: Mom asked about a letter demanding $1,200 in gift cards by 5 PM. Doodad told her it is a scam and not to pay.",
       mike:"Mike receives the same scam warning at the same time.",
       log:"access_log: sarah viewed m_0841 at 08:42 · mike viewed m_0841 at 08:50" },
     { id:"pill", label:"Pill bottle", time:"9:05 AM", mode:"LOOK", color:"--look", always:false,
       s:[
         "LOOK pressed. One camera frame of a pill bottle. Ruth asks: “Is this the one I take with breakfast?”",
-        "Reads the label: Lisinopril 10 mg, take one tablet daily. Intent: medication check. Handled by the on-device model.",
+        "Reads the label: Lisinopril 10 mg, take one tablet daily. Intent: medication check. Read by our own senior-tuned model.",
         "Health guardrail: Doodad reads the label and gives no dosing advice. Matches the 9:00 AM Lisinopril reminder Sarah set.",
         "Doodad says: “This is Lisinopril, 10 milligrams. The label says one tablet daily. It's the one Sarah set for 9 o'clock.”"
       ],
-      rec:[["moment","m_0905"],["time","09:05"],["trigger","LOOK"],["intent","medication_check"],["model","on_device"],["label","Lisinopril 10 mg, 1 tablet daily"],["guardrail","label_only"],["reminder","rem_0900 matched"],["category","routine"],["media","frame_01.jpg, 30-day retention"]],
+      rec:[["moment","m_0905"],["time","09:05"],["trigger","LOOK"],["intent","medication_check"],["model","doodad_vision (our cloud)"],["label","Lisinopril 10 mg, 1 tablet daily"],["guardrail","label_only"],["reminder","rem_0900 matched"],["category","routine"],["media","frame_01.jpg, 30-day retention"]],
       lv:{ "private":"Mom used Doodad at 9:05 AM.",
            "summary":"Mom checked her 9:00 medication with Doodad. Care tab: 9:00 Lisinopril checked off.",
            "detailed":"Mom asked “Is this the one I take with breakfast?” Doodad read the label: Lisinopril 10 mg, one tablet daily. It matches the 9:00 reminder. Care tab: checked off. Photo attached." },
@@ -399,11 +399,11 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
     { id:"tv", label:"TV fix", time:"2:31 PM", mode:"LOOK", color:"--look", always:false, partner:true,
       s:[
         "LOOK pressed. One camera frame of the TV. Ruth says: “The thing on the TV went away.”",
-        "Vision: TV is on HDMI 2 with a no-signal screen. Intent: get the TV picture back. Handled on device.",
+        "Vision: TV is on HDMI 2 with a no-signal screen. Intent: get the TV picture back. Read by our own model; the device sends the IR command.",
         "No safety flags.",
         "IR command INPUT → Cable. Doodad says: “Your TV was on the wrong input. I switched it back to cable.”"
       ],
-      rec:[["moment","m_1431"],["time","14:31"],["trigger","LOOK"],["intent","tv_help"],["model","on_device"],["observed","hdmi_2, no_signal"],["action","ir: INPUT → Cable"],["result","resolved"],["category","routine"],["pattern","tv_help: 4 in 7 days"]],
+      rec:[["moment","m_1431"],["time","14:31"],["trigger","LOOK"],["intent","tv_help"],["model","doodad_vision (our cloud), ir on device"],["observed","hdmi_2, no_signal"],["action","ir: INPUT → Cable"],["result","resolved"],["category","routine"],["pattern","tv_help: 4 in 7 days"]],
       lv:{ "private":"Mom used Doodad at 2:31 PM.",
            "summary":"Doodad helped Mom with the TV.",
            "detailed":"Mom said “The thing on the TV went away.” The TV was on HDMI 2 with no signal. Doodad switched the input to Cable. Photo attached." },
@@ -425,7 +425,7 @@ footer{ max-width:1240px; margin:0 auto; padding:20px 24px 40px; font-family:var
     { id:"checkin", label:"Check-in", time:"6:03 PM", mode:"TALK", color:"--talk", always:true,
       s:[
         "Sarah sends a check-in request from her app. Doodad asks aloud: “Sarah is checking in. Want to send her a note?” Ruth presses TALK: “Tell her I had lunch with Dot and I’m watching my program. I’m good.”",
-        "Transcribes the reply on device. Intent: answer a check-in.",
+        "Our speech model, tuned on older voices, transcribes the reply. Intent: answer a check-in.",
         "No safety flags. Ruth chose to answer. She can also say no or let it pass.",
         "Doodad says: “Sent to Sarah.”"
       ],
